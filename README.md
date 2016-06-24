@@ -9,3 +9,5 @@ Material need generator
 Unit converter
 Cost calculator
 Saveable job data, cut sheets
+
+Pockets should have ability to form sub-pockets
