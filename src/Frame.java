@@ -1,7 +1,12 @@
+/*
+ * Frame.java
+ */
 import java.util.Scanner;
 
-/*
- *
+/**
+ * 
+ * @author Garrett Lahmann
+ * @version June 25, 2016
  */
 public class Frame {
 	private int horPocketCount;
@@ -63,7 +68,7 @@ public class Frame {
 	public double getHeight() {
 		return height;
 	}
-
+ 
 	public String toString() {
 
 	}
