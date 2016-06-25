@@ -9,4 +9,8 @@ public class Glass {
 		this.length = length + .75;
 		this.width = width + .75;
 	}
+	
+	public static void main(String args) {
+		System.out.println(Frame.getWidth());
+	}
 }
