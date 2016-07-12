@@ -2,10 +2,13 @@ package com.glassworks.core;
 /*
  * Frame.java
  * 
+ * ****All units in INCHES****
+ * 
  * TODO:
  *  Integrate with pocket class
  *  Figure out sub-pocket logic
  *  Improve toString() output
+ *  
  *  
  */
 import java.util.Scanner;
@@ -30,10 +33,10 @@ public class Frame extends BuildObject {
 	private Pocket[][] pockets;
 
 	/**
-	 * Construct new Frame based on width and height.
+	 * Construct new Frame based on width and height. Width and height input must be greater than 4.0".
 	 * 
-	 * @param width
-	 * @param height
+	 * @param width		horizontal dimension of a frame.
+	 * @param height	vertical dimension of a a frame.
 	 */
 	public Frame(double width, double height) {
 		this.width = width;
@@ -57,22 +60,27 @@ public class Frame extends BuildObject {
 		// Construct array to hold pockets
 		pockets = new Pocket[horPocketCount][vertPocketCount];
 
-		// TODO: Logic for pocket size generator with multipockets
+		// TODO: 
+		//  Logic for pocket size generator with multipockets
+		//  Error when beam allowance for pocket number exceeds given dimensions i.e. too many pockets for size
+		// Currently constructs pockets of equal dimensions (no irregular size allowance yet)
 		double pocketWidth;
 		double pocketHeight;
 		for(int i = 0; i < horPocketCount; i++) {
-			for(int i = vertPocketCount - 1; i >= 0; i++) {
+			for(int j = vertPocketCount - 1; j >= 0; j--) {
+				pocketWidth = (width - 2 * (horPocketCount + 1)) / horPocketCount;
+				pocketHeight = (height - 2 * (vertPocketCount + 1)) / vertPocketCount;
 				pockets[i][j] = new Pocket(pocketWidth, pocketHeight);
 			}
 		}
 
 	}
 
-	/**
+	/** 
 	 * 
-	 * @param orientation
-	 * @param console
-	 * @return
+	 * @param orientation	the axis of alignment (horizontal or vertical).
+	 * @param console		a scanner to accept user input.
+	 * @return 				number of pockets in a given direction.
 	 */
 	private int getPocketCounts(String orientation, Scanner console) {
 		return checkInt("How many " + orientation + " pockets in the frame? ", console);
@@ -87,16 +95,17 @@ public class Frame extends BuildObject {
 	 */
 	private int checkInt(String message, Scanner console) {
 		System.out.print(message);
-		int val = -1;
-		while(val < 1) {
+		int val;
+		do {
+			// TODO: Fix repetition on first error!!!!!!!!!!!!!!!!!!!!
 			while(!console.hasNextInt()) {
-				console.nextLine();
 				System.out.println("Error: Value must be a positive integer.");
 				System.out.print(message);
+				console.next();
 			}
 			val = console.nextInt();
 			console.nextLine();
-		}
+		} while (val < 1);
 		return val;
 	}
 
@@ -112,7 +121,19 @@ public class Frame extends BuildObject {
 	 * Return a String representation of the defining dimensions of the frame.
 	 */
 	public String toString() {
-		return "size: " + width + "x" + height + "\npockets: " + horPocketCount + "x" + vertPocketCount; 
+		StringBuilder output = new StringBuilder();
+		output.append("Frame size: ");
+		output.append(width);
+		output.append(" x ");
+		output.append(height);
+		output.append("\n");
+		output.append("Pockets: ");
+		output.append(horPocketCount);
+		output.append(" x ");
+		output.append(vertPocketCount);
+		output.append("\nPocket dimensions: "); // TODO: Create visual representation for all pockets.
+		output.append(pockets[0][0].toString());
+		return output.toString(); 
 	}
 	
 	/**

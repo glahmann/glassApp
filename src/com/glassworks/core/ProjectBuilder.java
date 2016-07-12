@@ -6,7 +6,9 @@ package com.glassworks.core;
  * 	Input validation
  * 	File output
  *  Door builder
+ *  Unit converter e.g. .5 -> 1/2"
  *  ???
+ *  
  */
 
 
@@ -14,12 +16,21 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 
+ * Builds and stores all objects for a given job.
  * 
  * @author Garrett Lahmann
+ * @version July 12th, 2016
  *
  */
 public class ProjectBuilder {
+	
+	/**
+	 * Driver program for entire GlassApp. Creates a running project that stores user-entered frames and doors.
+	 * 
+	 * TODO: Add ability to modify post instantiation.
+	 * 
+	 * @param args		reads command line input.
+	 */
 	public static void main(String[] args) {
 		Scanner console = new Scanner(System.in);
 		// List to hold all major object components of a job
@@ -28,35 +39,49 @@ public class ProjectBuilder {
 		
 		System.out.println("Welcome to ProjectBuilder\n");
 		do {
-			System.out.println("Please select an option from the menu below:");
-			optionList();
-			// TODO input validation
-			int choice = console.nextInt();
-			if(choice == 1) {
-				buildFrame(console, buildList);
-			} else if (choice == 2) {
-				buildDoor(console, buildList);
-			} else {
-				repeat = "n";
-			}
+			repeat = optionList(console, buildList);
+			
 		} while (repeat.equalsIgnoreCase("y"));
+		
+		for(BuildObject b: buildList) {
+			System.out.println(b + "\n");
+		}
 	}
 	
 	/**
 	 * List object builder options for user to select from.
+	 * 
+	 * @param console 
+	 * @param buildList	the list of BuildObjects composing the current project.
 	 */
-	public static void optionList() {
+	public static String optionList(Scanner console, ArrayList<BuildObject> buildList) {
 		// TODO brainstorm more options
-		System.out.println("1. Window \n2. Door \3. Quit");
+		System.out.println("Please select an option from the menu below:");
+		System.out.println("1. Window \n2. Door \n3. Quit");
+		// TODO input validation
+		int choice = console.nextInt();
+		if(choice == 1) {
+			buildFrame(console, buildList);
+			return "y";
+		} else if (choice == 2) {
+			buildDoor(console, buildList);
+			return "y";
+		} else {
+			return "n";
+		}
 	}
 	
 	/**
 	 * Builds a single frame based on user dimensions and adds
+	 * 
 	 * @param console
 	 */
 	public static void buildFrame(Scanner console, ArrayList<BuildObject> buildList) {
-		double width = 0, height = 0;
-		System.out.println();
+		double width, height;
+		System.out.println("Enter RO dimensions separated by a space: "); // TODO elaborate on this.
+		// TODO input validation
+		width = console.nextDouble();
+		height = console.nextDouble();
 		
 		Frame frame = new Frame(width, height);
 		buildList.add(frame);
@@ -64,12 +89,19 @@ public class ProjectBuilder {
 	
 	/**
 	 * Builds a single door based on user dimensions and adds
+	 * 
 	 * @param console
 	 */
-	/*public static void buildDoor(Scanner console, ArrayList<BuildObject> buildList) {
+	public static void buildDoor(Scanner console, ArrayList<BuildObject> buildList) {
 		double width = 0, height = 0;
 		
-		System.out.println();
+		System.out.println("Enter door opening dimensions separated by a space: ");
+		// TODO input validation
+		width = console.nextDouble();
+		height = console.nextDouble();
 		
-	}*/
+		Door door = new Door(width, height);
+		buildList.add(door);
+		
+	}
 }

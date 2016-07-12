@@ -1,24 +1,29 @@
 package com.glassworks.core;
-// 6/27: I changed your fields to match my frame class and added getters for testing.
+
 /*
  * Glass.java
  * 
  * TODO:
- *  ???
+ * Check .75" addition for accuracy!!! 
+ * 
  */
 
 /**
  * 
- * @author Alex Merk
+ * @author Garrett Lahmann
  * @version June 25, 2016
  *
  */
 public class Glass {
 
+	// TODO incorporate all fields
 	private double width;
 	private double height;
+	private double depth; 		// e.g. .625, 1.0
+	private double glassThickness; // e.g. .125, .25
+	private String cure;		// e.g. tempered, annealed, laminated
 		
-	public Glass(double width, double height){
+	public Glass(double width, double height) {
 		this.width = width + .75;
 		this.height = height + .75;
 	}
@@ -29,6 +34,10 @@ public class Glass {
 	
 	public double getHeight() {
 		return height;
+	}
+	
+	public String toString() {
+		return "Glass: " + width + "x" + height;
 	}
 	
 	/**

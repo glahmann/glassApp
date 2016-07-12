@@ -3,28 +3,52 @@ package com.glassworks.core;
  * Door.java
  * 
  * TODO:
- *  EVERYTHING
- *  ???
+ *  WHITEBOARD the following
+ *  Unsure if I want it to extend Frame or be unique
+ *  Extend pocket?
+ *  left/right pivots?
+ *  closer type... automatic?
+ *  handles/push bars
+ *  single/double
+ *  
  */
 
 
 /**
  * Builds a door object inside of door frame.
- * ***********Unsure if I want it to extend Frame or be unique.. Need to whiteboard.
+ * ***********
  * 
  * @author Garrett Lahmann
  * @version June 27, 2016
  *
  */
-public class Door extends Frame{
+public class Door extends BuildObject{
 	
+	private double width;
+	private double height;
+	private String pivot;
+	private boolean doubleDoor;
 	/**
 	 * 
-	 * @param width
-	 * @param height
+	 * @param width		vertical dimension of door pocket.
+	 * @param height	horizontal dimension of door pocket.
 	 */
 	public Door(double width, double height) {
-		Frame(width, height);
+		// Frame(width, height);	maybe?
+		this.width = width;
+		this.height = height;
 		
+	}
+	
+	public double getWidth() {
+		return width;
+	}
+	
+	public double getHeight() {
+		return height;
+	}
+	
+	public String toString() {
+		return "Door: " + width + "x" + height;
 	}
 }
