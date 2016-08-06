@@ -11,6 +11,7 @@ To simplify the bidding and construction processes of commercial glass installat
 - Glass.java
 - Pocket.java
 - ProjectBuilder.java
+- BinFractionConverter.java
 
 
 ## TODO:
