@@ -7,6 +7,7 @@ package com.glassworks.core;
  * 	File output
  *  Door builder
  *  Unit converter e.g. .5 -> 1/2"
+ *  Add desired precision for user input??? Or use 16ths as standard
  *  ???
  *  
  */
