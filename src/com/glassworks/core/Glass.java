@@ -37,7 +37,8 @@ public class Glass {
 	}
 	
 	public String toString() {
-		return "Glass: " + width + "x" + height;
+		return "Glass: " + BinFractionConverter.toBinFraction(width) + " x " + 
+				BinFractionConverter.toBinFraction(height) + "\n";
 	}
 	
 	/**

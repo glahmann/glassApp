@@ -85,7 +85,7 @@ public class Frame extends BuildObject {
 	 * @return 				number of pockets in a given direction.
 	 */
 	private int getPocketCounts(String orientation, Scanner console) {
-		return checkInt("How many " + orientation + " pockets in the frame? ", console);
+		return checkInt("How many " + orientation + " pockets in the frame? \n", console);
 	}
 
 	/**
@@ -125,9 +125,9 @@ public class Frame extends BuildObject {
 	public String toString() {
 		StringBuilder output = new StringBuilder();
 		output.append("Frame size: ");
-		output.append(width);
+		output.append(BinFractionConverter.toBinFraction(width));
 		output.append(" x ");
-		output.append(height);
+		output.append(BinFractionConverter.toBinFraction(height));
 		output.append("\n");
 		output.append("Pockets: ");
 		output.append(horPocketCount);

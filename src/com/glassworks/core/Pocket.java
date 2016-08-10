@@ -5,6 +5,7 @@
  *  Manage sub pockets
  *  
  */
+
 package com.glassworks.core;
 
 /**
@@ -40,6 +41,7 @@ public class Pocket {
 	}
 	
 	public String toString() {
-		return  width + "x" + height + "\n" + pane.toString();
+		return  BinFractionConverter.toBinFraction(width) + " x " + 
+				BinFractionConverter.toBinFraction(height) + "\n" + pane.toString();
 	}
 }

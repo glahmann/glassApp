@@ -49,6 +49,7 @@ public class Door extends BuildObject{
 	}
 	
 	public String toString() {
-		return "Door: " + width + "x" + height;
+		return "Door: " + BinFractionConverter.toBinFraction(width) + " x " + 
+				BinFractionConverter.toBinFraction(height) + "\n";
 	}
 }
