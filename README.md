@@ -17,7 +17,6 @@ To simplify the bidding and construction processes of commercial glass installat
 ## TODO:
 
 - GUI
-- Unit converter (decimal inches <--> fractional inches)
 - Cost calculation
 - Write data to file
 - Output material requirements from each object

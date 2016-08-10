@@ -1,5 +1,3 @@
-package com.glassworks.core;
-
 /*
  * Glass.java
  * 
@@ -7,6 +5,8 @@ package com.glassworks.core;
  * Check .75" addition for accuracy!!! 
  * 
  */
+
+package com.glassworks.core;
 
 /**
  * 

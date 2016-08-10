@@ -1,4 +1,3 @@
-package com.glassworks.core;
 /*
  * Door.java
  * 
@@ -13,6 +12,7 @@ package com.glassworks.core;
  *  
  */
 
+package com.glassworks.core;
 
 /**
  * Builds a door object inside of door frame.

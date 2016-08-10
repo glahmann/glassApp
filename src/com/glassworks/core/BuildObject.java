@@ -1,4 +1,3 @@
-package com.glassworks.core;
 /*
  * BuildObject.java
  * 
@@ -7,6 +6,8 @@ package com.glassworks.core;
  *  Determine hierarchy
  *  
  */
+
+package com.glassworks.core;
 
 /**
  * This class provides basic structure for each major element of a given project, e.g. frames, doors, etc.

@@ -1,21 +1,19 @@
-package com.glassworks.core;
-
-import java.awt.List;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-
 /*
  * BinFractionConverter.java
  * 
  * TODO:
- * 	Determine if better to round up or down when converting to fractions
- * 	Complete toDecimal() method
- *  Debug: VERY slow!!!
+ * 	Comprehensive error handling for toDecimal() method
+ * 	Deal with invalid input
  * 
  */
+
+package com.glassworks.core;
+
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
 
 /**
  * This class contains methods that allow for conversion between decimal and binary fraction equivalents. The purpose
@@ -43,11 +41,16 @@ public class BinFractionConverter {
 				"15/32 1/2 17/32 9/16 19/32 5/8 21/32 11/16 23/32 3/4 25/32 13/16 27/32 7/8 " +
 				"29/32 15/16 31/32";
 		Map<Double, String> aMap = new LinkedHashMap<Double, String>();
-		Scanner deciScan = new Scanner(deci);
-		Scanner fractScan = new Scanner(fract);
+		Scanner deciScan = new Scanner(deci); // Create scanner for decimal string
+		Scanner fractScan = new Scanner(fract); // Create scanner for fraction string
+		// Populate map with decimal & fractional equivalents
 		while(deciScan.hasNextDouble()) {
 			aMap.put(deciScan.nextDouble(), fractScan.next());
 		}
+		
+		// Close scanners
+		deciScan.close();
+		fractScan.close();
 		
 		return aMap;
 	}
@@ -62,7 +65,6 @@ public class BinFractionConverter {
 	public static String toBinFraction (double number) {
 		int num = (int) Math.floor(number);
 		double decimal = number - num;
-		String fraction = "";
 		
 		if (Math.abs(decimal - 0) < .00000001) { // Return whole number if no decimal
 			return num + "";
@@ -74,7 +76,7 @@ public class BinFractionConverter {
 			int hi = keys.size() - 1;
 
 			// Loop until decimal comes within 1/64th of a fraction
-			while (low <= hi) { // Fix me!!!!!!!!!!!!!!!!!!!!!
+			while (low <= hi) { 
 				int idx = (hi + low)/2;
 				if (Math.abs(decimal - keys.get(idx)) <= .015625) {
 					return num + " " + convTable.get(keys.get(idx));
@@ -89,15 +91,42 @@ public class BinFractionConverter {
 	}
 	
 	/**
-	 * Converts string fraction to its decimal equivalent.
+	 * Converts string fraction to its decimal equivalent. Fraction must be a multiple 
+	 * of 1/32 and simplified where possible.
 	 * 
 	 * @param fraction
 	 * @return decimal the decimal equivalent.
 	 */
 	public static Double toDecimal (String fraction) {
 		double decimal = 0;
-		
+		Scanner scan = new Scanner(fraction);
+		if (!scan.hasNextInt()) {
+			scan.close();
+			throw new IllegalArgumentException();
+		} else {
+			decimal += scan.nextInt();
+			if (scan.hasNext()) {
+				decimal += getKeyFromValue(scan.next());
+			}
+		}
+		scan.close();
 		return decimal;
+	}
+	
+	/**
+	 * This method returns a decimal corresponding to a given fraction. This fraction must
+	 * be a multiple of 1/32 and simplified where possible.
+	 * 
+	 * @param frac		a string representing a fraction.
+	 * @return			a decimal equivalent of the entered fraction.
+	 */
+	private static double getKeyFromValue (String frac) {
+		for (Entry<Double, String> entry: convTable.entrySet()) {
+			if (frac.equalsIgnoreCase(entry.getValue())) {
+				return entry.getKey();
+			}
+		}
+		return 0.0; // Return 0 if no equivalent. Should fix???
 	}
 	
 	/**
@@ -106,11 +135,15 @@ public class BinFractionConverter {
 	 * @param args	reads command line input.
 	 */
 	public static void main (String[] args) {
-		System.out.println(toBinFraction(50.5));
+		System.out.println(toBinFraction(50.48));
 		System.out.println(toBinFraction(50.23));
 		System.out.println(toBinFraction(50.0));
 		System.out.println(toBinFraction(50.99));
-		System.out.println(toBinFraction(50.86));
+		System.out.println(toBinFraction(50.858));
+		System.out.println(toDecimal("50 15/32"));
+		System.out.println(toDecimal("50 1/3")); // Incompatible fraction
+		System.out.println(toDecimal("50"));	 // No fraction
+		System.out.println(toDecimal("50 1/2"));
 		
 	}
 }

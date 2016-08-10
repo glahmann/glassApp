@@ -1,4 +1,3 @@
-package com.glassworks.core;
 /*
  * ProjectBuilder.java
  * 
@@ -12,6 +11,7 @@ package com.glassworks.core;
  *  
  */
 
+package com.glassworks.core;
 
 import java.util.ArrayList;
 import java.util.Scanner;

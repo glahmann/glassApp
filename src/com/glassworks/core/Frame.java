@@ -1,4 +1,3 @@
-package com.glassworks.core;
 /*
  * Frame.java
  * 
@@ -11,6 +10,9 @@ package com.glassworks.core;
  *  
  *  
  */
+
+package com.glassworks.core;
+
 import java.util.Scanner;
 
 /**
