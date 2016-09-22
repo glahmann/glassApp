@@ -89,7 +89,7 @@ public class ProjectBuilder {
 	}
 	
 	/**
-	 * Builds a single door based on user dimensions and adds
+	 * Builds a single door based on user dimensions and adds 
 	 * 
 	 * @param console
 	 */
